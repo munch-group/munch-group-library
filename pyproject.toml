@@ -81,7 +81,7 @@ pip = "*"
 
 
 [tool.pixi.tasks.init-project]
-cmd = "./scripts/template_init.py && ./.scripts/init-project.sh -y"
+cmd = "./.scripts/template_init.py && ./.scripts/init-project.sh -y"
 description = "Initialize template and remove project-specific files"
 
 [tool.pixi.tasks.install-claude]
@@ -92,7 +92,7 @@ cmd = "bash ./.scripts/claude-session.sh {{ '--new' if 'new' in new }}"
 args = [ { arg = "new", default = "" } ]
 
 [tool.pixi.tasks.init-library]
-cmd = "./scripts/template_init.py && ./.scripts/init-library.sh -y"
+cmd = "./.scripts/template_init.py && ./.scripts/init-library.sh -y"
 description = "Remove files not relevant to library development"
 
 # [tool.pixi.tasks.init-template]
