@@ -43,8 +43,8 @@ website:
     left:
       - href: api/
         text: API reference
-      - href: gallery/
-        text: Gallery
+      # - href: gallery/
+      #   text: Gallery
     right:
       - icon: github
         href: https://github.com/munch-group/munch-group-template/
@@ -54,7 +54,7 @@ website:
       style: floating
       align: left
       contents:
-        - pages/getting_started.ipynb
+        - pages/overview.ipynb
         - section: "Examples"
           contents:
             - pages/example.ipynb                   
@@ -76,7 +76,7 @@ format:
       theme: neutral 
 
 quartodoc:
-  package: chrom-window
+  package: munch-group-template
   style: pkgdown
   dir: api
   render_interlinks: true
