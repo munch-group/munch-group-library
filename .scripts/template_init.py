@@ -5,7 +5,7 @@ Template initialization script for Python library projects.
 This script:
 1. Gets the repository name from git
 2. Converts dashes to underscores to create a valid Python module name
-3. Replaces all instances of "munch-group-template" with the module name
+3. Replaces all instances of "munch-group-library" with the module name
 4. Renames the src/munch_group_template directory to src/{modulename}
 
 Usage:
@@ -166,7 +166,7 @@ def main():
     # Replace text in files
     files_changed = 0
     for file_path in files_to_process:
-        if find_and_replace_in_file(file_path, "munch-group-template", repo_name, args.dry_run):
+        if find_and_replace_in_file(file_path, "munch-group-library", repo_name, args.dry_run):
             files_changed += 1
             status = "Would update" if args.dry_run else "✓"
             print(f"  {status} {file_path}")
