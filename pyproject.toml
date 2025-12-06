@@ -26,7 +26,7 @@ Repository = "https://github.com/munch-group/munch-group-library"
 Documentation = "https://munch-group.org/munch-group-library"
 
 [project.scripts]
-munch-group-library = "munch_group_template:munch_group_template"
+munch-group-library = "munch_group_library:munch_group_library"
 
 [tool.setuptools]
 include-package-data = true
@@ -36,7 +36,7 @@ where = ["src"]
 exclude = ["test*"]
 
 [tool.setuptools.package-data]
-munch_group_template = ["data/*.txt", "data/*.csv", "data/*.pickle", "data/*.h5"]
+munch_group_library = ["data/*.txt", "data/*.csv", "data/*.pickle", "data/*.h5"]
 
 [tool.pixi.workspace]
 channels = ["conda-forge", "munch-group"]

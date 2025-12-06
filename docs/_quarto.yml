@@ -90,13 +90,13 @@ quartodoc:
 
   sections:
     - title: Some section
-      package: munch_group_template.modulename
+      package: munch_group_library.modulename
       desc: |
         Some description...
       contents:
         - functionname
     - title: Some other section
-      package: munch_group_template.modulename
+      package: munch_group_library.modulename
       desc: |
         Some description...
       contents:
