@@ -77,6 +77,14 @@ seaborn = "*"
 pytables = "*"
 pip = "*"
 
+#
+
+[tool.pixi.tasks.init]
+args = [
+  { "arg" = "new_name" }
+]
+cmd = "python ./scripts/rename.py {{new_name}} && gh repo set-default https://github.com/munch-group/{{new_name}}"
+
 [tool.pixi.tasks.install-dev]
 cmd = "pip install --no-build-isolation --no-deps --disable-pip-version-check -e ."
 description = "Install the package in development mode"
