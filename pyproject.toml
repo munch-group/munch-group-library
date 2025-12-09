@@ -61,23 +61,19 @@ dev = {features = ["dev"], solve-group = "default"}
 pytest = "*"
 setuptools = ">=65.0"
 wheel = "*"
-anthropic = "*"
-gitpython = "*"
-rpds-py = "*"
-jsonschema = "*"
 git = "*"
 git-lfs = "*"
 gh = "*"
-conda-build = "*"
-cryptography = "*"
-jupyterlab = ">=4"
-nbdime = "*"
+gitpython = "*"
+quarto = "*"
+quaratodoc = "*"
+nbconvert = "*"
+anthropic = "*"
+rpds-py = "*"
+jsonschema = "*"
 nodejs = "*"
-seaborn = "*"
-pytables = "*"
 pip = "*"
 
-#
 
 [tool.pixi.tasks.init]
 args = [
