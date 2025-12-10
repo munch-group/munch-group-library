@@ -1,100 +1,75 @@
 {
-	"build": {
-		"dockerfile": "./Dockerfile",
-		"context": "."
-	},
-	"features": {
-		"ghcr.io/devcontainers/features/common-utils:2": {
-			"installZsh": "true",
-			"username": "vscode",
-			"userUid": "1000",
-			"userGid": "1000",
-			"upgradePackages": "true"
-		},
-		"ghcr.io/devcontainers/features/git:1": {
-            "version": "latest",
-            "ppa": "false"
+  "name": "Claude Code Sandbox",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "TZ": "${localEnv:TZ:America/Los_Angeles}",
+      "CLAUDE_CODE_VERSION": "latest",
+      "GIT_DELTA_VERSION": "0.18.2",
+      "ZSH_IN_DOCKER_VERSION": "1.2.0"
+    },
+    // "context": ".",
+    "options": ["--platform=linux/amd64"]
+  },
+  "runArgs": [
+    "--cap-add=NET_ADMIN",
+    "--cap-add=NET_RAW",
+    "--platform=linux/amd64"
+  ],
+  // "runArgs": ["--cap-add=NET_ADMIN", "--cap-add=NET_RAW"],
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": true,
+      "installOhMyZsh": true
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "bash",
+            "icon": "terminal-bash"
+          },
+          "zsh": {
+            "path": "zsh"
+          }
         }
-	},	
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [5000, 5001],
-	// [Optional] To reuse of your local HTTPS dev cert:
-	//
-	// 1. Export it locally using this command:
-	//    * Windows PowerShell:
-	//        dotnet dev-certs https --trust; dotnet dev-certs https -ep "$env:USERPROFILE/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-	//    * macOS/Linux terminal:
-	//        dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
-	// 
-	// 2. Uncomment these 'remoteEnv' lines:
-	//    "remoteEnv": {
-	// 	      "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
-	//        "ASPNETCORE_Kestrel__Certificates__Default__Path": "/home/vscode/.aspnet/https/aspnetapp.pfx",
-	//    },
-	//
-	// 3. Do one of the following depending on your scenario:
-	//    * When using GitHub Codespaces and/or Remote - Containers:
-	//      1. Start the container
-	//      2. Drag ~/.aspnet/https/aspnetapp.pfx into the root of the file explorer
-	//      3. Open a terminal in VS Code and run "mkdir -p /home/vscode/.aspnet/https && mv aspnetapp.pfx /home/vscode/.aspnet/https"
-	//
-	//    * If only using Remote - Containers with a local container, uncomment this line instead:
-	//      "mounts": [ "source=${env:HOME}${env:USERPROFILE}/.aspnet/https,target=/home/vscode/.aspnet/https,type=bind" ],
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "dotnet restore",
-	// Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "vscode",
-    "customizations": {
-      "vscode": {
-        "settings": {},
-        "extensions": [
-          "ms-python.python", 
-          "charliermarsh.ruff", 
-          "GitHub.copilot",
-		  "anthropic.claude-code",
-          "ms-vscode-remote.remote-containers",
-          "ms-toolsai.jupyter",
-          "eamodio.gitlens",
-          "yzhang.markdown-all-in-one",
-          "tamasfe.even-better-toml",
-		  "quarto.quarto",
-        ]
       }
-    },	
-	"postCreateCommand": "pixi install --locked",
+    }
+  },
+  "postCreateCommand": "/workspace/.devcontainer/mcp-setup/install.sh",
+  "remoteUser": "node",
+  "mounts": [
+    "source=claude-code-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
+    "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume"
+  ],
+  "containerEnv": {
+    
+    "NODE_OPTIONS": "--max-old-space-size=4096",
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude",
+    "POWERLEVEL9K_DISABLE_GITSTATUS": "true",
+    "PIXI_HOME": "/home/node/.pixi",
+    "MCP_SERVERS_DIR": "/home/node/.local/mcp-servers"
+  },
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:/home/node/.pixi/bin:/home/node/.cargo/bin:/home/node/.local/bin"
+  },
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated",
+  "workspaceFolder": "/workspace",
+  "postStartCommand": "sudo /usr/local/bin/init-firewall.sh",
+  "waitFor": "postStartCommand"
 }
-
-
-
-// {
-//     "name": "my-project",
-//     "build": {
-//       "dockerfile": "Dockerfile",
-//       "context": "..",
-//       // "options": [
-//       //     "--secret",
-//       //     "id=prefix_dev_token,env=PREFIX_DEV_TOKEN",
-//       // ],      
-//     },
-// //    "remoteUser": "vscode", // this must match the USER in the Dockerfile
-//     "customizations": {
-//       "vscode": {
-//         "settings": {},
-//         "extensions": [
-//           "ms-python.python", 
-//           "charliermarsh.ruff", 
-//           "GitHub.copilot",
-//           "ms-vscode-remote.remote-containers",
-//           "ms-toolsai.jupyter",
-//           "eamodio.gitlens",
-//           "yzhang.markdown-all-in-one",
-//           "tamasfe.even-better-toml",				
-//         ]
-//       }
-//     },
-//     // "features": {
-//     //   "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-//     // },
-//     // "mounts": ["source=${localWorkspaceFolderBasename}-pixi,target=${containerWorkspaceFolder}/.pixi,type=volume"],
-//     // "postCreateCommand": "sudo chown vscode .pixi && pixi install",
-// }

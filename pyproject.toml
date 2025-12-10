@@ -2,7 +2,7 @@
 requires = ["setuptools>=61.0", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
-[project]
+[workspace]
 name = "munch-group-library"
 version = "0.1.2"
 description = "Project description"
@@ -48,6 +48,7 @@ git = ">=2.51.0,<3"
 gh = ">=2.79.0,<3"
 quartodoc = ">=0.11.1,<0.12"
 pip = ">=25.2,<26"
+nodejs = ">=20"
 
 # [tool.pixi.pypi-dependencies]
 # Optional PyPI dependencies can be added here
@@ -66,7 +67,7 @@ git-lfs = "*"
 gh = "*"
 gitpython = "*"
 quarto = "*"
-quaratodoc = "*"
+quartodoc = "*"
 nbconvert = "*"
 anthropic = "*"
 rpds-py = "*"
