@@ -8,7 +8,7 @@
       "GIT_DELTA_VERSION": "0.18.2",
       "ZSH_IN_DOCKER_VERSION": "1.2.0"
     },
-    // "context": ".",
+    // "context": "..",
     "options": ["--platform=linux/amd64"]
   },
   "runArgs": [
@@ -30,7 +30,42 @@
         "anthropic.claude-code",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
-        "eamodio.gitlens"
+        "eamodio.gitlens",
+        "be5invis.toml",
+        "ms-vscode.cpptools-",
+        "ms-toolsai.jupyter-",
+        "reditorsupport.r-syntax",
+        "dnut.rewrap-revived",
+        "ms-vscode.vscode-speech",
+        "njpwerner.autodocst",
+        "samuelcolvin.jinjah",
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "vadimcn.vscode-lldb",
+        "streetsidesoftware.code-spell-checker",
+        "howardzuo.vscode-favorites",
+        "mhutchie.git-graph",
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        // "ms-python.isort",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.vscode-jupyter-cell-tags",
+        "ms-toolsai.jupyter-renderers",
+        "james-yu.latex-workshop",
+        "sumneko.lua",
+        "yzhang.markdown-all-in-one",
+        "takumii.markdownt",
+        "webfreak.debug",
+        "ms-python.vscode-pylance",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "ms-python.vscode-python-envs",
+        "quarto.quarto",
+        "reditorsupport.r",
+        "mechatroner.rainbow-csv",
+        "redhat.vscode-yaml",
+        "charliermarsh.ruff", 
+        "tamasfe.even-better-toml"
       ],
       "settings": {
         "editor.formatOnSave": true,
@@ -51,6 +86,7 @@
       }
     }
   },
+  // "postCreateCommand": "pixi config set --local run-post-link-scripts insecure && /workspace/.devcontainer/mcp-setup/install.sh",
   "postCreateCommand": "/workspace/.devcontainer/mcp-setup/install.sh",
   "remoteUser": "node",
   "mounts": [
@@ -58,7 +94,6 @@
     "source=claude-code-config-${devcontainerId},target=/home/node/.claude,type=volume"
   ],
   "containerEnv": {
-    
     "NODE_OPTIONS": "--max-old-space-size=4096",
     "CLAUDE_CONFIG_DIR": "/home/node/.claude",
     "POWERLEVEL9K_DISABLE_GITSTATUS": "true",

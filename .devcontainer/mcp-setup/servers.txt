@@ -9,10 +9,11 @@
 
 # Example: A server with its own pixi.toml
 paper-search|git-clone|https://github.com/openags/paper-search-mcp|
-desktop-commander|git-clone|https://github.com/wonderwhy-er/DesktopCommanderMCP.git|
-string-db|git-clone|https://github.com/munch-group/string-mcp.git|
+desktop-commander|git-clone|https://github.com/wonderwhy-er/DesktopCommanderMCP|
+string-db|git-clone|https://github.com/munch-group/string-mcp|
 ensembl-db|git-clone|https://github.com/munch-group/ensembl-mcp|
-# markitdown-mcp|git-clone|https://github.com/microsoft/markitdown/tree/main/packages/markitdown-mcp|
+markitdown-mcp|git-clone|https://github.com/microsoft/markitdown|
+mcp-find|git-clone|https://github.com/mcprepository/mcp-find|
 
 # Example: Private repo (requires SSH key or GH auth)
 # internal-tools|git-clone|git@github.com:myorg/internal-mcp.git|

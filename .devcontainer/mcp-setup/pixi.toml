@@ -12,6 +12,11 @@ python = ">=3.11"
 nodejs = ">=20"
 git = "*"
 jq = "*"
+pip = "*"
+gcc = "*"
+# Audio support for voice-enabled MCP servers
+alsa-lib = "*"
+portaudio = "*"
 
 # pip dependencies (PyPI packages)
 [pypi-dependencies]

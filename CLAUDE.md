@@ -209,4 +209,5 @@ When adding inline citations to scientific papers, use Author-Year format:
 
 - This project uses MCP servers for enhanced capabilities
 - The devcontainer includes pixi for package management
-- Both conda (pixi) and pip (uv) environments are supported for MCP servers
+- MCP servers use pixi environments (conda packages + pip when needed)
+- PyPI-based servers are installed with pip in the shared pixi environment to ensure Python headers are available

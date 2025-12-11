@@ -138,39 +138,17 @@ EOF
             add_server "$name" "$wrapper"
             echo "  Adding (pixi repo): $name"
 
-        # Check for pyproject.toml (pip/uv-based environment)
+        # Check for pyproject.toml (pip-based environment installed in shared pixi env)
         elif [[ -f "$repo_dir/pyproject.toml" ]]; then
             wrapper="$WRAPPER_DIR/${name}.sh"
-            venv_dir="$repo_dir/.venv"
 
-            # Determine the command to run the server
-            # Try to find it in pyproject.toml [project.scripts] or use a default
-            if grep -q "\[project.scripts\]" "$repo_dir/pyproject.toml"; then
-                # Use uvx to run the package (installs in isolated env)
-                cat > "$wrapper" << EOF
+            # Use pixi run to execute in the shared environment
+            # This provides Python headers and better binary compatibility
+            cat > "$wrapper" << EOF
 #!/bin/bash
-cd "$repo_dir"
-exec uvx --from . $name "\$@"
+cd "$MCP_DIR"
+exec pixi run -e "$MCP_ENV" python -m $name "\$@"
 EOF
-            elif [[ -f "$venv_dir/bin/python" ]]; then
-                # Use existing venv
-                cat > "$wrapper" << EOF
-#!/bin/bash
-cd "$repo_dir"
-exec "$venv_dir/bin/python" -m $name "\$@"
-EOF
-            else
-                # Create venv and install
-                cat > "$wrapper" << EOF
-#!/bin/bash
-cd "$repo_dir"
-if [[ ! -f "$venv_dir/bin/python" ]]; then
-    uv venv "$venv_dir"
-    uv pip install -e .
-fi
-exec "$venv_dir/bin/python" -m $name "\$@"
-EOF
-            fi
 
             chmod +x "$wrapper"
             add_server "$name" "$wrapper"

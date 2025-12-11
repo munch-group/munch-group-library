@@ -98,3 +98,6 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | bash
 
 # Update PATH to include pixi, uv, and local binaries
 ENV PATH="/home/node/.pixi/bin:/home/node/.cargo/bin:/home/node/.local/bin:${PATH}"
+
+RUN echo 'eval "$(pixi/bin/pixi completion -s bash)"' >> /home/node/.bashrc
+RUN echo 'eval "$(pixi/bin/pixi completion -s zsh)"' >> /home/node/.zshrc

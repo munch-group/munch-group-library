@@ -1,3 +1,4 @@
+claude mcp add pubmed --transport http https://pubmed.mcp.claude.com/mcp
 
 ![](https://github.com/munch-group/munch-group-library/actions/workflows/quarto-publish.yml/badge.svg?event=push)
 
@@ -5,9 +6,13 @@
 
 ## Initial set up
 
+```bash
+pixi run initialize
+```
+
 - In the link above, replace `libraryname` with your library's name.
-- Rename the `libraryname` folder to the name of your library, do *not* use hyphens, '-', in the name. 
-- Replace all instances of `libraryname`, `modulename`, and `functionname` for the names of/in your library (`Shift-Cmd-F` in VScode). 
+- Rename the `libraryname` folder to the name of your library, do _not_ use hyphens, '-', in the name.
+- Replace all instances of `libraryname`, `modulename`, and `functionname` for the names of/in your library (`Shift-Cmd-F` in VScode).
 
 ![example event parameter](https://github.com/munch-group/libraryname/actions/workflows/quarto-publish.yml/badge.svg?event=push)
 
@@ -17,7 +22,7 @@ In addition to any dependencies of your library, the development setup requires 
 
 conda-forge::jupyter
 conda-forge::nbconvert
-conda-forge::quartodoc 
+conda-forge::quartodoc
 conda-forge::gh
 conda-forge::git
 conda-forge::pip

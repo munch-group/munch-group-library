@@ -65,7 +65,10 @@ my-server|git-clone|https://github.com/user/my-mcp-server.git|
 
 The setup automatically detects and handles:
 - **pixi.toml**: Creates isolated conda environment via `pixi install`
-- **pyproject.toml**: Creates isolated Python venv via `uv venv` and `uv pip install`
+- **pyproject.toml**: Installs in shared pixi environment via `pixi run pip install -e`
+  - Uses pixi's Python (includes development headers)
+  - Avoids missing `Python.h` compilation errors
+  - Better binary compatibility via conda-forge packages
 
 ### Using the MCP Servers
 

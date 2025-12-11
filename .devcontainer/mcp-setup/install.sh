@@ -81,10 +81,11 @@ if [[ -f "$SCRIPT_DIR/servers.txt" ]]; then
             if [[ -f "$repo_dir/pixi.toml" ]]; then
                 echo "  Installing pixi environment for $name..."
                 (cd "$repo_dir" && pixi install)
-            # If it has a pyproject.toml, create venv and install
+            # If it has a pyproject.toml, install in shared pixi environment with pip
+            # This avoids missing Python.h errors and provides better binary compatibility
             elif [[ -f "$repo_dir/pyproject.toml" ]]; then
-                echo "  Installing Python environment for $name..."
-                (cd "$repo_dir" && uv venv .venv && uv pip install -e .)
+                echo "  Installing Python package in pixi environment for $name..."
+                (cd "$MCP_DIR" && pixi run -e "$MCP_ENV" pip install -e "$repo_dir")
             fi
         fi
     done < "$SCRIPT_DIR/servers.txt"
