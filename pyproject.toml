@@ -79,20 +79,32 @@ dev = {features = ["dev"], solve-group = "default"}
 cmd = "python ./scripts/rename.py && gh repo set-default https://github.com/munch-group/{{new_name}}"
 
 [tool.pixi.tasks.install-dev]
-cmd = "pip install --no-build-isolation --no-deps --disable-pip-version-check -e ."
+cmd = "pip install -e ."
+# cmd = "pip install --no-build-isolation --no-deps --disable-pip-version-check -e ."
 description = "Install the package in development mode"
 
 [tool.pixi.tasks.docs]
 cmd = "./scripts/docs-run-notebooks.sh && ./scripts/docs-build-render.sh"
 description = "Run documentation notebooks and build quartodoc api docs"
 
-[tool.pixi.tasks.git-remove-untracked]
-cmd = "git clean -fd"
+[tool.pixi.tasks.clean]
+cmd = "git clean -id"
 description = "Removes untracked files and directories but respects your .gitignores"
+
+[tool.pixi.tasks.add-commit-push]
+cmd = "git add -u && git commit && git push"
+description = "Release latest version on Github"
+
+[tool.pixi.tasks._add-commit]
+cmd = "git add -u && git commit"
 
 [tool.pixi.tasks.test]
 cmd = "python -m unittest"
 description = "Run tests"
+
+[tool.pixi.tasks.bump-changelog]
+cmd = "./scripts/bump_changelog.py --yes"
+description = "Bump version patch and build/release conda packages"
 
 [tool.pixi.tasks.bump-version]
 args = [
@@ -100,13 +112,19 @@ args = [
   { "arg" = "flag", "default" = "" },     # can be --pre, --release
 ]
 cmd = "./scripts/bump_version.py --{{ kind }} {{ flag }} &&  git add -u &&  git commit -m '{{ kind }} {{ flag }} version bump' && git push" 
-description = "Bump version patch and build/release conda packages"
-
-[tool.pixi.tasks.bump-changelog]
-cmd = "./scripts/bump_changelog.py --yes"
+depends-on = ["_add-commit"]
 description = "Bump version patch and build/release conda packages"
 
 [tool.pixi.tasks.github-release]
 cmd = "./scripts/github-release.sh"
+depends-on = ["bump-version"]
 description = "Release latest version on Github"
 
+[tool.pixi.tasks.submit-patch]
+cmd = "echo 'Update released!'"
+depends-on = ["github-release"]
+description = "Push committed patch make new release of package"
+
+[tool.pixi.tasks.acpr]
+depends-on = ["submit-patch"]
+description = "Alias for submit-patch"
