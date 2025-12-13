@@ -21,8 +21,8 @@ print(data['project']['version'])
   p=$(python -c "'--prerelease' if 'rc' in \"$v\" else '--latest' ") || exit
 
   # git tag -a "v${v}" -m "${1:-Release}" && git push origin --tags && echo -e "${GREEN}Released version v${v} ${NC}" && exit
-  set -v
-  gh release create $p "v${v}" --title "v$(python -c \"import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])\")" --notes "" && exit
+  # set -v
+  gh release create $p "v${v}" --title "v$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")" --notes "" && exit
 fi
 echo -e "${RED}Failed${NC}"
 
