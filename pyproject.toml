@@ -92,11 +92,11 @@ cmd = "git clean -id"
 description = "Removes untracked files and directories but respects your .gitignores"
 
 [tool.pixi.tasks.add-commit-push]
-cmd = "git add -u && git commit && git push"
+cmd = "git add -u && ./scripts/git-commit.sh && git push"
 description = "Release latest version on Github"
 
 [tool.pixi.tasks._add-commit]
-cmd = "git add -u && git commit"
+cmd = "git add -u && ./scripts/git-commit.sh"
 
 [tool.pixi.tasks.test]
 cmd = "python -m unittest"
