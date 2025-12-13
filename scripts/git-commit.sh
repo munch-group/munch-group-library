@@ -1,5 +1,38 @@
 #!/bin/bash
 
+# Generate diff using nbdime for notebooks (cleaner semantic diff) and regular git diff for other files
+# Ignores notebook changes that are only re-executions (output changes without code changes)
+get_staged_diff() {
+  if git diff --cached --name-only | grep -q '\.ipynb$'; then
+    # Only include notebook diff if there are actual source changes (not just outputs)
+    nb_source_diff=$(nbdiff -s -a -o HEAD --staged 2>/dev/null)
+    if [[ -n "$nb_source_diff" ]]; then
+      nb_diff="$nb_source_diff"
+    else
+      nb_diff=""
+    fi
+    other_diff=$(git diff --cached -- ':!*.ipynb' 2>/dev/null)
+
+    if [[ -n "$nb_diff" && -n "$other_diff" ]]; then
+      echo "$other_diff"
+      echo ""
+      echo "=== Notebook changes ==="
+      echo "$nb_diff"
+    elif [[ -n "$nb_diff" ]]; then
+      echo "$nb_diff"
+    elif [[ -n "$other_diff" ]]; then
+      echo "$other_diff"
+    else
+      # Only output re-runs, mention it briefly
+      echo "(Notebook changes are output-only re-executions)"
+    fi
+  else
+    git diff --cached
+  fi
+}
+
+nbdime config-git --enable
+
 if [[ -n "$ANTHROPIC_API_KEY" ]] && git diff --cached --quiet --exit-code 2>/dev/null; then
   echo "No staged changes to commit"
   exit 1
@@ -8,7 +41,7 @@ elif [[ -n "$ANTHROPIC_API_KEY" ]]; then
   payload=$(mktemp)
 
   # Truncate diff to first ~50k chars to avoid token limits
-  git diff --cached | head -c 50000 | jq -Rs '{
+  get_staged_diff | head -c 50000 | jq -Rs '{
     model: "claude-sonnet-4-20250514",
     max_tokens: 256,
     messages: [{role: "user", content: ("Write a concise git commit message for this diff. Just the message, no quotes, no explanation:\n\n" + .)}]

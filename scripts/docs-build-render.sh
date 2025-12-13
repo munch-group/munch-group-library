@@ -6,5 +6,3 @@ pip install --no-deps --force-reinstall -e . \
     && quartodoc build && quartodoc interlinks && quarto render \
     && cd .. \
     && pip uninstall -y munch-group-library
-
-git add docs

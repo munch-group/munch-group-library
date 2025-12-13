@@ -57,6 +57,7 @@ git-lfs = "*"
 gh = "*"
 ipython = "*"
 seaborn = "*"
+nbdime = ">=4.0.2,<5"
 
 # [tool.pixi.pypi-dependencies]
 # Optional PyPI dependencies can be added here
@@ -74,6 +75,7 @@ anthropic = "*"
 git = "*"
 git-lfs = "*"
 gh = "*"
+nbdime = "*"
 gitpython = "*"
 rpds-py = "*"
 jsonschema = "*"
@@ -93,7 +95,7 @@ cmd = "pip install -e ."
 description = "Install the package in development mode"
 
 [tool.pixi.tasks.docs]
-cmd = "./scripts/docs-run-notebooks.sh && ./scripts/docs-build-render.sh"
+cmd = "./scripts/docs-run-notebooks.sh && ./scripts/docs-build-render.sh && git add -u docs"
 description = "Run documentation notebooks and build quartodoc api doc pages"
 
 [tool.pixi.tasks.clean]
