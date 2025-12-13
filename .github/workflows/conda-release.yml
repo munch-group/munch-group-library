@@ -12,6 +12,9 @@ name: Build and upload conda packages
 # # workflow_dispatch:        # Un comment line if you also want to trigger action manually
 
 
+{% set platform_builds = True %}
+
+
 on:
   push:
     tags:
@@ -69,14 +72,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        # os: [ubuntu-latest, windows-latest]
-        # os: [macOS-latest, macos-13, ubuntu-latest]
-        # os: [macOS-latest, macos-13, ubuntu-latest, windows-latest]
-        os: [macOS-latest, ubuntu-latest]
+        os: [macOS-latest, ubuntu-latest] #, macos-13, windows-latest]
+        # # ==============================================================================
+        # # Uncomment to produce multi-platform builds:
+        # python-version: ["3.10", "3.11", "3.12", "3.13"] 
+        # # ==============================================================================
 
     steps:
       - uses: actions/checkout@v3
-
       - name: Conda environment creation and activation
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -85,6 +88,11 @@ jobs:
           auto-update-conda: false
           auto-activate-base: false
           show-channel-urls: true
+          # # ==============================================================================
+          # # Uncomment to produce multi-platform builds:
+          # python-version: ${{ matrix.python-version }} 
+          # # ==============================================================================
+
 
       # - name: Install dependencies
       #   run: |
@@ -96,12 +104,19 @@ jobs:
       #     pip install pytest
       #     pytest test
 
+
       - name: Build and upload the conda packages
         uses: munch-group/action-conda-build-upload@v0.1.26
         with:
           meta_yaml_dir: conda-build
           user: munch-group
-          # label: auto
           token: ${{ secrets.ANACONDA_TOKEN }}
           overwrite: true
-    
+          # # ==============================================================================
+          # # Uncomment to produce multi-platform builds:
+          # conda_build_args: -c conda-forge -c munch-group
+          # platform_osx-arm64: true
+          # platform_linux-64: true
+          # platform_osx-64: true
+          # # ==============================================================================
+
