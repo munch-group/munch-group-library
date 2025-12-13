@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import re
+import subprocess
 import sys
 
 import argparse
@@ -112,4 +113,7 @@ for file, content in new_contents.items():
     print(f"  {file.ljust(just)}  (replaced {len(re.findall(new_version, content))} instance)")
     with open(file, 'w') as f:
         f.write(content)
+
+    print(f'Staging {file} for git commit')
+    subprocess.run(['git', 'add', file])
 

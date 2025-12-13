@@ -5,7 +5,7 @@
 get_staged_diff() {
   if git diff --cached --name-only | grep -q '\.ipynb$'; then
     # Only include notebook diff if there are actual source changes (not just outputs)
-    nb_source_diff=$(nbdiff -s -a -o HEAD --staged 2>/dev/null)
+    nb_source_diff=$(nbdiff --ignore-outputs --ignore-metadata --ignore-id  HEAD 2>/dev/null)
     if [[ -n "$nb_source_diff" ]]; then
       nb_diff="$nb_source_diff"
     else
