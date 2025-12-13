@@ -136,9 +136,10 @@ _book/
 # apple double files
 ._*
 
+docs/_inv/
+
 # Pixi
 .pixi/
-pixi.lock
 
 .claude-uuid
 

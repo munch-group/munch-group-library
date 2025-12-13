@@ -4,15 +4,22 @@ if [[ -n "$ANTHROPIC_API_KEY" ]] && git diff --cached --quiet --exit-code 2>/dev
   echo "No staged changes to commit"
   exit 1
 elif [[ -n "$ANTHROPIC_API_KEY" ]]; then
-  msg=$(git diff --cached | curl -s https://api.anthropic.com/v1/messages \
+  tmpfile=$(mktemp)
+  git diff --cached > "$tmpfile"
+
+  msg=$(jq -n \
+    --rawfile diff "$tmpfile" \
+    '{
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 256,
+      messages: [{role: "user", content: ("Write a concise git commit message for this diff. Just the message, no quotes, no explanation:\n\n" + $diff)}]
+    }' | curl -s https://api.anthropic.com/v1/messages \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
-    -d "$(jq -n --arg diff "$(cat)" '{
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 256,
-      messages: [{role: "user", content: "Write a concise git commit message for this diff. Just the message, no quotes, no explanation:\n\n\($diff)"}]
-    }')" | jq -r '.content[0].text')
+    -d @- | jq -r '.content[0].text')
+
+  rm "$tmpfile"
   
   echo "Commit message: $msg"
   read -p "Use this message? [Y/n/e(dit)] " choice
