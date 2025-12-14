@@ -31,6 +31,18 @@ get_staged_diff() {
   fi
 }
 
+# check if any staged files are too large for github (50M)
+abort=false
+for file in $(git diff --name-only --cached); do
+  if [[ -n $(du -m -t 50 $file) ]]; then
+    echo "$file too large to commit"
+    abort=true
+  fi
+done
+if [[ "$abort" = true ]] ; do
+  exit 1
+fi
+
 nbdime config-git --enable
 
 if [[ -n "$ANTHROPIC_API_KEY" ]] && git diff --cached --quiet --exit-code 2>/dev/null; then
