@@ -7,65 +7,55 @@ claude mcp add pubmed --transport http https://pubmed.mcp.claude.com/mcp
 ## Initial set up
 
 ```bash
-pixi run initialize
+pixi run init
 ```
 
-- In the link above, replace `libraryname` with your library's name.
-- Rename the `libraryname` folder to the name of your library, do _not_ use hyphens, '-', in the name.
-- Replace all instances of `libraryname`, `modulename`, and `functionname` for the names of/in your library (`Shift-Cmd-F` in VScode).
+## Get updates to upstream fork
 
-![example event parameter](https://github.com/munch-group/libraryname/actions/workflows/quarto-publish.yml/badge.svg?event=push)
+Add upstream if not already added
 
-## Development
-
-In addition to any dependencies of your library, the development setup requires [quarto](https://quarto.org) the following packages:
-
-conda-forge::jupyter
-conda-forge::nbconvert
-conda-forge::quartodoc
-conda-forge::gh
-conda-forge::git
-conda-forge::pip
-
-## Version
-
-The only version you need to change is the one in `setup.cfg`.
-
-## Unit tests
-
-Test are put in `test/test_modulename.py`. Run these and all other `test_*` files you create by running `./scripts/test.sh`.
-
-## Creating docs
-
-Use type hits (with the `typing` module) for code and add this to your `settings.json` in VScode.
-
-```
-"files.associations": {
-    "*.qmd": "quarto"
-},
-"autoDocstring.docstringFormat": "numpy",
-"autoDocstring.startOnNewLine": true,
-"autoDocstring.customTemplatePath": "docs/autodoc.mustache",
+```bash
+git remote add upstream https://github.com/munch-group/munch-group-library.git
 ```
 
-That lets you can autogenerate doc-strings by typing `"""` at the top of your functions.
+Fetch upstream changes
 
-## Publishing docs
+```bash
+git fetch upstream
+```
 
-Docs are published to your github pages site `https://{user}.github.io/{libraryname}`. The template is set up for the user `munch-group`, but you can substitute all its instances for your own github user name.
+Either rebase your changes on top of upstream (cleaner history)
 
-Run all documentation notebooks inplace by running `./docs-run-notebooks.sh`. Build and render all documentation by running `./docs-build-render.sh`.
+```bash
+git rebase upstream/main
+```
 
-## Publishing conda package
+Or, merge upstream into your fork (preserves history)
 
-Once pushed to github the library can be published as a conda package by running `./conda-release.sh`.
+```bash
+git merge upstream/main
+```
 
-Publishing the conda package to anaconda requires that you set up a github secret, `ANACONDA_TOKEN`, that you create on your anaconda.org account.
+If you want to see what's changed upstream before applying:
 
-## Library dependencies
+```bash
+git log HEAD..upstream/main
+```
 
-Dependencies are managed in `pyproject.toml` and automatically read by `conda-build/meta.yaml`.
+See the actual diff
 
-## Entry points
+```bash
+git diff HEAD...upstream/main
+```
 
-Entry points are defined in `pyproject.toml` and automatically read by `conda-build/meta.yaml`.
+Then push your updated fork:
+
+```bash
+git push origin main
+```
+
+If you rebased and need to force push
+    
+```bash
+git push origin main --force-with-lease
+```
