@@ -15221,6 +15221,7 @@ asyncio_example_watch_fd std:label -1 library/asyncio-eventloop.html#asyncio-exa
 atexit-example std:label -1 library/atexit.html#$ atexit Example
 atom-identifiers std:label -1 reference/expressions.html#$ Identifiers (Names)
 atom-literals std:label -1 reference/expressions.html#$ Literals
+atomic operation std:term -1 glossary.html#term-atomic-operation -
 atoms std:label -1 reference/expressions.html#$ Atoms
 attached thread state std:term -1 glossary.html#term-attached-thread-state -
 attr-target-note std:label -1 reference/simple_stmts.html#$ -
@@ -15497,6 +15498,8 @@ compress-wbits std:label -1 library/zlib.html#$ -
 concrete std:label -1 c-api/concrete.html#$ Concrete Objects Layer
 concrete-paths std:label -1 library/pathlib.html#$ Concrete paths
 concurrency std:label -1 library/concurrency.html#$ Concurrent Execution
+concurrency std:term -1 glossary.html#term-$ -
+concurrent modification std:term -1 glossary.html#term-concurrent-modification -
 condition std:pdbcommand 1 library/pdb.html#pdbcommand-$ -
 condition-objects std:label -1 library/threading.html#$ Condition objects
 configparser-objects std:label -1 library/configparser.html#$ ConfigParser Objects
@@ -15603,6 +15606,7 @@ custominterp std:label -1 library/custominterp.html#$ Custom Python Interpreters
 customization std:label -1 reference/datamodel.html#$ Basic customization
 customize-memory-allocators std:label -1 c-api/memory.html#$ Customize Memory Allocators
 cyclic isolate std:term -1 glossary.html#term-cyclic-isolate -
+data race std:term -1 glossary.html#term-data-race -
 data-handler-objects std:label -1 library/urllib.request.html#$ DataHandler Objects
 dataclasses-class-variables std:label -1 library/dataclasses.html#$ Class variables
 dataclasses-frozen std:label -1 library/dataclasses.html#$ Frozen instances
@@ -15622,6 +15626,7 @@ datetime-timedelta std:label -1 library/datetime.html#$ timedelta Objects
 datetime-timezone std:label -1 library/datetime.html#$ timezone Objects
 datetime-tzinfo std:label -1 library/datetime.html#$ tzinfo Objects
 datetimeobjects std:label -1 c-api/datetime.html#$ DateTime Objects
+deadlock std:term -1 glossary.html#term-$ -
 debug std:pdbcommand 1 library/pdb.html#pdbcommand-$ -
 debug-build std:label -1 using/configure.html#$ Python Debug Build
 debugger std:label -1 library/pdb.html#$ pdb — The Python Debugger
@@ -16013,7 +16018,9 @@ getting-started std:label -1 library/unittest.mock-examples.html#$ -
 gilstate std:label -1 c-api/init.html#$ Non-Python created threads
 global std:label -1 reference/simple_stmts.html#$ The global statement
 global interpreter lock std:term -1 glossary.html#term-global-interpreter-lock -
+global state std:term -1 glossary.html#term-global-state -
 global-conf-vars std:label -1 c-api/init.html#$ Global configuration variables
+global-start-method std:label -1 library/multiprocessing.html#$ Global start method
 glossary std:doc -1 glossary.html Glossary
 glossary std:label -1 glossary.html#$ Glossary
 group-patterns std:label -1 reference/compound_stmts.html#$ Group Patterns
@@ -16601,6 +16608,7 @@ locale encoding std:term -1 glossary.html#term-locale-encoding -
 locale-gettext std:label -1 library/locale.html#$ Access to message catalogs
 locale_name std:label -1 library/locale.html#locale-name Locale names
 locator-objects std:label -1 library/xml.sax.reader.html#$ Locator Objects
+lock std:term -1 glossary.html#term-$ -
 lock-objects std:label -1 library/threading.html#$ Lock objects
 log-record std:label -1 library/logging.html#$ LogRecord Objects
 logger std:label -1 library/logging.html#$ Logger Objects
@@ -16749,6 +16757,7 @@ namespace std:term -1 glossary.html#term-$ -
 namespace package std:term -1 glossary.html#term-namespace-package -
 naming std:label -1 reference/executionmodel.html#$ Naming and binding
 nargs std:label -1 library/argparse.html#$ -
+native code std:term -1 glossary.html#term-native-code -
 nested scope std:term -1 glossary.html#term-nested-scope -
 netdata std:label -1 library/netdata.html#$ Internet Data Handling
 netrc-objects std:label -1 library/netrc.html#$ netrc Objects
@@ -16767,6 +16776,7 @@ new-types-topics std:label -1 extending/newtypes.html#$ Defining Extension Types
 new-vs-init std:label -1 howto/enum.html#$ When to use __new__() vs. __init__()
 newtypes std:label -1 c-api/objimpl.html#$ Object Implementation Support
 next std:pdbcommand 1 library/pdb.html#pdbcommand-$ -
+non-deterministic std:term -1 glossary.html#term-$ -
 noneobject std:label -1 c-api/none.html#$ The None Object
 nonlocal std:label -1 reference/simple_stmts.html#$ The nonlocal statement
 not std:label -1 reference/expressions.html#$ Boolean operations
@@ -16873,6 +16883,7 @@ p std:pdbcommand 1 library/pdb.html#pdbcommand-$ -
 package std:term -1 glossary.html#term-$ -
 package-distributions std:label -1 library/importlib.metadata.html#$ Mapping import to distribution packages
 package-path-rules std:label -1 reference/import.html#$ __path__ attributes on modules
+parallelism std:term -1 glossary.html#term-$ -
 parameter std:term -1 glossary.html#term-$ -
 parenthesized std:label -1 reference/expressions.html#$ Parenthesized forms
 parsetuple std:label -1 extending/extending.html#$ Extracting Parameters in Extension Functions
@@ -17272,6 +17283,7 @@ queue-handler std:label -1 library/logging.handlers.html#$ QueueHandler
 queue-listener std:label -1 library/logging.handlers.html#$ QueueListener
 queueobjects std:label -1 library/queue.html#$ Queue Objects
 quit std:pdbcommand 1 library/pdb.html#pdbcommand-$ -
+race condition std:term -1 glossary.html#term-race-condition -
 raise std:label -1 reference/simple_stmts.html#$ The raise statement
 random-cli std:label -1 library/random.html#$ Command-line usage
 random-cli-example std:label -1 library/random.html#$ Command-line example
@@ -17298,6 +17310,7 @@ readline-example std:label -1 library/readline.html#$ Example
 real-valued-distributions std:label -1 library/random.html#$ Real-valued distributions
 recursion std:label -1 c-api/exceptions.html#$ Recursion Control
 reducer_override std:label -1 library/pickle.html#reducer-override Custom Reduction for Types, Functions, and Other Objects
+reentrant std:term -1 glossary.html#term-$ -
 reentrant-cms std:label -1 library/contextlib.html#$ Reentrant context managers
 refcounts std:label -1 extending/extending.html#$ Reference Counts
 refcountsinpython std:label -1 extending/extending.html#$ Reference Counting in Python
@@ -17525,6 +17538,7 @@ superseded std:label -1 library/superseded.html#$ Superseded Modules
 supporting-cycle-detection std:label -1 c-api/gcsupport.html#$ Supporting Cyclic Garbage Collection
 surrogateescape std:label -1 library/codecs.html#$ Error Handlers
 symtable-cli std:label -1 library/symtable.html#$ Command-Line Usage
+synchronization primitive std:term -1 glossary.html#term-synchronization-primitive -
 sys-path-init std:label -1 library/sys_path_init.html#$ The initialization of the sys.path module search path
 sys-path-init-virtual-environments std:label -1 library/sys_path_init.html#$ Virtual Environments
 sysconfig-cli std:label -1 library/sysconfig.html#$ Command-line usage
@@ -17580,6 +17594,7 @@ thread state std:term -1 glossary.html#term-thread-state -
 thread-local-storage std:label -1 c-api/init.html#$ Thread Local Storage Support
 thread-local-storage-api std:label -1 c-api/init.html#$ Thread Local Storage (TLS) API
 thread-objects std:label -1 library/threading.html#$ Thread objects
+thread-safe std:term -1 glossary.html#term-$ -
 thread-specific-storage-api std:label -1 c-api/init.html#$ Thread Specific Storage (TSS) API
 threadpoolexecutor-example std:label -1 library/concurrent.futures.html#$ ThreadPoolExecutor Example
 threads std:label -1 c-api/init.html#$ Thread State and the Global Interpreter Lock

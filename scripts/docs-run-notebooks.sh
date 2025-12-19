@@ -9,7 +9,9 @@ if test -d $DIR; then
   for FILE in $(find $DIR -name '*.ipynb') ; do
     echo -e "${BLUE}Rendering ${FILE}${NC}"
     # CMD="jupyter nbconvert --Application.log_level=50 --to notebook --execute --inplace $FILE"
-    CMD="jupyter nbconvert --log-level=WARN --to notebook --execute --inplace $FILE"
+    CMD="jupyter nbconvert --log-level=WARN --to notebook --execute --inplace \
+      --TagRemovePreprocessor.enabled=True \
+      --TagRemovePreprocessor.remove_cell_tags='{"skip-execution"}' $FILE"
     echo $CMD
     NOTEBOOK_THEME=light PYDEVD_DISABLE_FILE_VALIDATION=1 $CMD || exit 1 ;
   done
