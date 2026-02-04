@@ -89,7 +89,7 @@ default = {solve-group = "default"}
 dev = {features = ["dev"], solve-group = "default"}
 
 [tool.pixi.tasks.init]
-cmd = "python ./scripts/rename.py && gh repo set-default https://github.com/munch-group/{{new_name}}"
+cmd = "python ./scripts/rename.py && git remote set-url \"origin\" git@github.com:munch-group/$(basename $(git rev-parse --show-toplevel))"
 
 [tool.pixi.tasks.install-dev]
 cmd = "pip install -e ."
