@@ -72,7 +72,7 @@ cmd = "python ./scripts/rename.py && gh repo set-default https://github.com/munc
 
 [tool.pixi.tasks.install-dev]
 cmd = "pip install --no-build-isolation --force-reinstall --no-deps ."
-description = "Install phasic in development mode with FFI support"
+description = "Development install"
 
 [tool.pixi.tasks.notebook]
 args = [ { "arg" = "notebook" } ]
